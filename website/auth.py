@@ -29,8 +29,10 @@ def login():
     return render_template("login.html", user=current_user)
 
 @auth.route('/logout')
+@login_required
 def logout():
-    return render_template("home.html")
+    logout_user()
+    return redirect(url_for('views.home'))
 
 @auth.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -61,4 +63,4 @@ def signup():
             flash('Congratulations, Account creation successful!!', category="success")
             return redirect(url_for('views.home'))
             
-    return render_template("signup.html")
+    return render_template("signup.html", user=current_user)
