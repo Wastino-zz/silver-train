@@ -10,10 +10,14 @@ pool:
   name: DineroAgentPooll
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- script: sudo curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash 
+  displayName: 'Install the Azure CLI'
+  
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: '$(Azure_Subscription)'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: 'az webapp up -n $(APP_NAME) --os-type Linux --resource-group $(Resource_Group_Name) --location $(Location) --sku B1 --runtime "python|3.6"'
+    workingDirectory: 'src/'
+  displayName: "Deploy application to Azure"
