@@ -18,6 +18,6 @@ steps:
     azureSubscription: '$(Azure_Subscription)'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
-    inlineScript: 'az webapp up -n $(APP_NAME) --os-type Linux --resource-group $(Resource_Group_Name) --location $(Location) --sku B1 --runtime "python|3.6"'
+    inlineScript: 'az webapp up -n $(APP_NAME) --os-type Linux --resource-group $(Resource_Group_Name) --location $(Location) --sku B1 --runtime "python|3.9"'
     workingDirectory: 'src/'
   displayName: "Deploy application to Azure"
